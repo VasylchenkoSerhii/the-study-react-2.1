@@ -12,10 +12,13 @@ export class App extends Component  {
 
 
   render() {
-    <Box p={4}>
-      <Section title="Contacts">
-        <FormContacts />
-      </Section>
-    </Box>
+    return (
+      <Box p={4}>
+        <Section title="Contacts">
+          <FormContacts />
+        </Section>
+      </Box>
+    )
+    
   }
 };
