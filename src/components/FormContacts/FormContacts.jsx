@@ -1,12 +1,13 @@
 import { Formik, Form, Field } from "formik";
 
-export const FormContacts = () => {
+export const FormContacts = ({addContact}) => {
     const initialValues = {
-            name: "",
+        name: "",
+        number: "",
     };
     
     const handleSubmit = (values, {resetForm}) => {
-        console.log(values);
+        addContact(values)
         resetForm()
     };
     return (
@@ -18,6 +19,10 @@ export const FormContacts = () => {
                 <label>
                     Name
                     <Field type="text" name="name" />
+                </label>
+                <label>
+                    Number
+                    <Field type="tel" name="number" />
                 </label>
                 <button type="submit">Add contact</button>
             </Form>
