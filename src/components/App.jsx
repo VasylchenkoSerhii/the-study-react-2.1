@@ -13,7 +13,21 @@ export class App extends Component  {
   state = {
     contacts: [],
     filter: "",
-  }
+  };
+
+  componentDidMount() {
+    try {
+      const contacts = JSON.parse(localStorage.getItem("contacts"));
+      this.setState({ contacts });
+    } catch (error) {
+      console.log(error);
+    };
+  };
+
+  componentDidUpdate() {
+    const { contacts } = this.state;
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  };
 
   addContact = contact => {
     if (this.isDublicate(contact)) {
