@@ -16,13 +16,12 @@ export class App extends Component  {
   };
 
   componentDidMount() {
-    try {
-      const contacts = JSON.parse(localStorage.getItem("contacts"));
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    if (contacts) {
       this.setState({ contacts });
-    } catch (error) {
-      console.log(error);
-    };
+    }; 
   };
+    
 
   componentDidUpdate() {
     const { contacts } = this.state;
@@ -38,7 +37,6 @@ export class App extends Component  {
       id: nanoid(),
       ...contact,
     };
-
     this.setState(prevState => {
       return {
         contacts: [...prevState.contacts, newContact]
@@ -80,9 +78,10 @@ export class App extends Component  {
 
   isDublicate({name, number}) {
     const { contacts } = this.state;
-    const result = contacts.find(item => item.name === name
+      const result = contacts.find(item => item.name === name
       || item.number === number);
     return result;
+    
   };
 
 
@@ -95,7 +94,7 @@ export class App extends Component  {
         <Section title="Contacts">
           <FormContacts addContact={addContact} />
           <Filter filter={filter} onChange={handleChange} />
-          {contacts.length > 0
+          {contacts
             ? <ContactsList
                 contacts={contacts}
                 removeContact={removeContact}
